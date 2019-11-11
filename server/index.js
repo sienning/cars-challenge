@@ -25,7 +25,6 @@ app.get("/cars.json", (req, res) => {
         parseInt(req.query.distance, 10) <= availability.maxDistance
     );
   }
-
   res.json(availableCars);
 });
 

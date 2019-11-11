@@ -1,13 +1,17 @@
 import * as React from 'react';
+import Cars from './components/Cars';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css'; // Import precompiled Bootstrap css
+import '@fortawesome/fontawesome-free/css/all.css';
+
 
 const App = () => (
-  <div>
-  <h1>Hello!</h1>
-  <p>
-    Edit this file and linked JS/CSS, changes will appear directly in your
-    browser.
-  </p>
-</div>
+  <div className="container" >
+    <h1>Cars Challenge - App</h1>
+    <div>
+      <Cars />
+    </div>
+  </div>
 );
 
 export default App;
