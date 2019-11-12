@@ -55,8 +55,8 @@ class Cars extends React.Component<any, IState> {
         const dur = e.currentTarget.durationFilter.value;
         const dist = e.currentTarget.distanceFilter.value;
         const data = this.carsFilter(dur, dist);
-        data.then(value => { this.setState({ cars : value }) });
-        
+        data.then(value => { this.setState({ cars: value }) });
+
     };
 
     handleOnChangeDuration = () => {
@@ -82,6 +82,8 @@ class Cars extends React.Component<any, IState> {
                     <Filter handleSubmit={this.handleOnSubmit} handleOnChangeDuration={this.handleOnChangeDuration} handleOnChangeDistance={this.handleOnChangeDistance} duration={valueDuration} distance={valueDistance} />
 
                 </div>
+                <h4 className="text-center mb-4">Cars available</h4>
+
                 {isLoading ? (
                     <Spinner />
                 ) : (

@@ -31875,6 +31875,24 @@ var CarsCard = function CarsCard(_a) {
       pricePerKm = _a.pricePerKm,
       duration = _a.duration,
       distance = _a.distance;
+  var pDay = pricePerDay / 100;
+  var pKm = pricePerKm / 100;
+  var price = (duration * pDay + distance * pKm).toFixed(2);
+
+  var calculate = function calculate(pDay) {
+    pDay = pricePerDay / 100;
+
+    if (duration > 1 && duration < 4) {
+      pDay = pDay * (1 - 10 / 100);
+    } else if (duration > 4 && duration < 10) {
+      pDay = pDay * (1 - 30 / 100);
+    } else if (duration >= 10) {
+      pDay = pDay * (1 - 50 / 100);
+    }
+
+    return pDay;
+  };
+
   return React.createElement("div", {
     className: "col-md-3 col-sm-6 mb-5"
   }, React.createElement("div", {
@@ -31889,14 +31907,17 @@ var CarsCard = function CarsCard(_a) {
   }, brand, " - ", model), React.createElement("ul", {
     className: "list-group list-group-flush"
   }, React.createElement("li", {
-    className: "list-group-item"
-  }, "Price/Day : ", pricePerDay / 100, " \u20AC"), React.createElement("li", {
-    className: "list-group-item"
-  }, "Price/km : ", pricePerKm / 100, " \u20AC"), React.createElement("li", {
-    className: "list-group-item"
+    className: "list-group-item",
+    id: "p-day"
+  }, "Price/Day : ", calculate(pDay), " \u20AC"), React.createElement("li", {
+    className: "list-group-item",
+    id: "p-km"
+  }, "Price/km : ", pKm, " \u20AC"), React.createElement("li", {
+    className: "list-group-item",
+    id: "price"
   }, React.createElement("div", {
     className: "card-text"
-  }, React.createElement("b", null, " Price : ", (duration * (pricePerDay / 100) + distance * (pricePerKm / 100)).toFixed(2), " \u20AC")))))));
+  }, React.createElement("b", null, " Price : ", price, " \u20AC")))))));
 };
 
 exports.default = CarsCard;
@@ -31977,11 +31998,11 @@ var Filter = function Filter(_a) {
     className: "mb-5 mt-5 shadow-sm p-3 mb-5 bg-white rounded"
   }, React.createElement("h4", {
     className: "text-center"
-  }, "Filter"), React.createElement("form", {
+  }, "Plan your car rental"), React.createElement("form", {
     onChange: handleSubmit
   }, React.createElement("label", {
     htmlFor: "duration"
-  }, "Duration : ", duration, " days"), React.createElement("input", {
+  }, React.createElement("b", null, "Duration :"), " ", duration, " days"), React.createElement("input", {
     type: "range",
     className: "custom-range",
     min: "1",
@@ -31992,7 +32013,7 @@ var Filter = function Filter(_a) {
     name: "durationFilter"
   }), React.createElement("label", {
     htmlFor: "distance"
-  }, "Distance : ", distance, " km"), React.createElement("input", {
+  }, React.createElement("b", null, "Distance :"), " ", distance, " km"), React.createElement("input", {
     type: "range",
     className: "custom-range",
     min: "50",
@@ -32378,7 +32399,9 @@ function (_super) {
       handleOnChangeDistance: this.handleOnChangeDistance,
       duration: valueDuration,
       distance: valueDistance
-    })), isLoading ? React.createElement(Spinner_1.default, null) : React.createElement("div", {
+    })), React.createElement("h4", {
+      className: "text-center mb-4"
+    }, "Cars available"), isLoading ? React.createElement(Spinner_1.default, null) : React.createElement("div", {
       className: "card-group"
     }, React.createElement(ListCars_1.default, {
       cars: cars,
@@ -50372,7 +50395,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56219" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62924" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
