@@ -54,10 +54,6 @@ class Cars extends React.Component<any, IState> {
         e.preventDefault();
         const dur = e.currentTarget.durationFilter.value;
         const dist = e.currentTarget.distanceFilter.value;
-
-        console.log(e.currentTarget.distanceFilter.value);
-        console.log(e.currentTarget.durationFilter.value);
-
         const data = this.carsFilter(dur, dist);
         data.then(value => { this.setState({ cars : value }) });
         
@@ -82,8 +78,6 @@ class Cars extends React.Component<any, IState> {
 
         return (
             <div>
-                {/* {console.log("Cars.tsx")}
-                {isLoading ? console.log("loading") : console.log(cars)} */}
                 <div className="w-50 mx-auto">
                     <Filter handleSubmit={this.handleOnSubmit} handleOnChangeDuration={this.handleOnChangeDuration} handleOnChangeDistance={this.handleOnChangeDistance} duration={valueDuration} distance={valueDistance} />
 
@@ -92,7 +86,7 @@ class Cars extends React.Component<any, IState> {
                     <Spinner />
                 ) : (
                         <div className="card-group">
-                            <ListCars cars={cars} ></ListCars>
+                            <ListCars cars={cars} duration={valueDuration} distance={valueDistance}></ListCars>
                         </div>
                     )
                 }

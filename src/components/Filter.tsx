@@ -3,7 +3,7 @@ import * as React from 'react';
 const Filter = ({ handleSubmit, handleOnChangeDuration, handleOnChangeDistance, duration, distance }) => (
     <div className="mb-5 mt-5 shadow-sm p-3 mb-5 bg-white rounded">
         <h4 className="text-center">Filter</h4>
-        <form onSubmit={handleSubmit} >
+        <form onChange={handleSubmit} >
             <label htmlFor="duration">Duration : {duration} days</label>
             <input 
                 type="range" 
@@ -25,7 +25,7 @@ const Filter = ({ handleSubmit, handleOnChangeDuration, handleOnChangeDistance, 
                 defaultValue={distance} 
                 onInput={handleOnChangeDistance}
                 name="distanceFilter" />
-            <button type="submit" className="btn btn-primary">Submit</button>
+            {/* <button type="submit" className="btn btn-primary">Submit</button> */}
         </form>
     </div>
 

@@ -31872,11 +31872,13 @@ var CarsCard = function CarsCard(_a) {
       brand = _a.brand,
       model = _a.model,
       pricePerDay = _a.pricePerDay,
-      pricePerKm = _a.pricePerKm;
+      pricePerKm = _a.pricePerKm,
+      duration = _a.duration,
+      distance = _a.distance;
   return React.createElement("div", {
     className: "col-md-3 col-sm-6 mb-5"
   }, React.createElement("div", {
-    className: "card shadow p-3 mb-5 bg-white rounded"
+    className: "card text-center shadow p-3 mb-5 bg-white rounded"
   }, React.createElement("img", {
     src: urlImage,
     className: "card-img-top"
@@ -31890,7 +31892,11 @@ var CarsCard = function CarsCard(_a) {
     className: "list-group-item"
   }, "Price/Day : ", pricePerDay / 100, " \u20AC"), React.createElement("li", {
     className: "list-group-item"
-  }, "Price/km : ", pricePerKm / 100, " \u20AC")))));
+  }, "Price/km : ", pricePerKm / 100, " \u20AC"), React.createElement("li", {
+    className: "list-group-item"
+  }, React.createElement("div", {
+    className: "card-text"
+  }, React.createElement("b", null, " Price : ", (duration * (pricePerDay / 100) + distance * (pricePerKm / 100)).toFixed(2), " \u20AC")))))));
 };
 
 exports.default = CarsCard;
@@ -31922,7 +31928,9 @@ var React = __importStar(require("react"));
 var CarsCard_1 = __importDefault(require("./CarsCard"));
 
 var ListCars = function ListCars(_a) {
-  var cars = _a.cars;
+  var cars = _a.cars,
+      duration = _a.duration,
+      distance = _a.distance;
   return React.createElement("div", {
     className: "row"
   }, cars.map(function (i, index) {
@@ -31932,7 +31940,9 @@ var ListCars = function ListCars(_a) {
       brand: i.brand,
       model: i.model,
       pricePerDay: i.pricePerDay,
-      pricePerKm: i.pricePerKm
+      pricePerKm: i.pricePerKm,
+      duration: duration,
+      distance: distance
     });
   }));
 };
@@ -31968,7 +31978,7 @@ var Filter = function Filter(_a) {
   }, React.createElement("h4", {
     className: "text-center"
   }, "Filter"), React.createElement("form", {
-    onSubmit: handleSubmit
+    onChange: handleSubmit
   }, React.createElement("label", {
     htmlFor: "duration"
   }, "Duration : ", duration, " days"), React.createElement("input", {
@@ -31992,10 +32002,7 @@ var Filter = function Filter(_a) {
     defaultValue: distance,
     onInput: handleOnChangeDistance,
     name: "distanceFilter"
-  }), React.createElement("button", {
-    type: "submit",
-    className: "btn btn-primary"
-  }, "Submit")));
+  })));
 };
 
 exports.default = Filter;
@@ -32242,8 +32249,6 @@ function (_super) {
       e.preventDefault();
       var dur = e.currentTarget.durationFilter.value;
       var dist = e.currentTarget.distanceFilter.value;
-      console.log(e.currentTarget.distanceFilter.value);
-      console.log(e.currentTarget.durationFilter.value);
 
       var data = _this.carsFilter(dur, dist);
 
@@ -32376,7 +32381,9 @@ function (_super) {
     })), isLoading ? React.createElement(Spinner_1.default, null) : React.createElement("div", {
       className: "card-group"
     }, React.createElement(ListCars_1.default, {
-      cars: cars
+      cars: cars,
+      duration: valueDuration,
+      distance: valueDistance
     })));
   };
 
@@ -50365,7 +50372,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50521" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56219" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
