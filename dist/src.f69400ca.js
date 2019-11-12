@@ -31890,7 +31890,7 @@ var CarsCard = function CarsCard(_a) {
       pDay = pDay * (1 - 50 / 100);
     }
 
-    return pDay;
+    return pDay.toFixed(2);
   };
 
   return React.createElement("div", {
@@ -31907,8 +31907,7 @@ var CarsCard = function CarsCard(_a) {
   }, brand, " - ", model), React.createElement("ul", {
     className: "list-group list-group-flush"
   }, React.createElement("li", {
-    className: "list-group-item",
-    id: "p-day"
+    className: "list-group-item"
   }, "Price/Day : ", calculate(pDay), " \u20AC"), React.createElement("li", {
     className: "list-group-item",
     id: "p-km"
@@ -31969,7 +31968,12 @@ var ListCars = function ListCars(_a) {
 };
 
 exports.default = ListCars;
-},{"react":"../node_modules/react/index.js","./CarsCard":"components/CarsCard.tsx"}],"components/Filter.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./CarsCard":"components/CarsCard.tsx"}],"Filter.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/Filter.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importStar = this && this.__importStar || function (mod) {
@@ -31988,17 +31992,50 @@ Object.defineProperty(exports, "__esModule", {
 
 var React = __importStar(require("react"));
 
+require("../Filter.css");
+
 var Filter = function Filter(_a) {
   var handleSubmit = _a.handleSubmit,
       handleOnChangeDuration = _a.handleOnChangeDuration,
       handleOnChangeDistance = _a.handleOnChangeDistance,
       duration = _a.duration,
       distance = _a.distance;
+
+  var calcPercent = function calcPercent(dur) {
+    var percent = 10;
+    var offer = document.getElementById("offer");
+
+    if (dur > 1 && dur < 4) {
+      console.log("hello");
+      offer.style.visibility = "visible";
+      percent = 10;
+    } else if (dur > 4 && dur < 10) {
+      console.log("bye");
+      offer.style.visibility = "visible";
+      percent = 30;
+    } else if (dur >= 10) {
+      console.log("ok");
+      offer.style.visibility = "visible";
+      percent = 50;
+    } else if (dur == 1) {
+      console.log("hi");
+      console.log(offer);
+      percent = 0; // offer.style.visibility = "";
+    }
+
+    return percent;
+  };
+
   return React.createElement("div", {
     className: "mb-5 mt-5 shadow-sm p-3 mb-5 bg-white rounded"
   }, React.createElement("h4", {
     className: "text-center"
-  }, "Plan your car rental"), React.createElement("form", {
+  }, "Plan your car rental"), React.createElement("h6", {
+    className: "text-center",
+    id: "offer"
+  }, "Special offer : Price per Day ", React.createElement("span", {
+    className: "badge badge-success"
+  }, "-", calcPercent(duration), "%")), React.createElement("form", {
     onChange: handleSubmit
   }, React.createElement("label", {
     htmlFor: "duration"
@@ -32027,7 +32064,7 @@ var Filter = function Filter(_a) {
 };
 
 exports.default = Filter;
-},{"react":"../node_modules/react/index.js"}],"components/Spinner.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../Filter.css":"Filter.css"}],"components/Spinner.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importStar = this && this.__importStar || function (mod) {
@@ -32302,6 +32339,7 @@ function (_super) {
       valueDuration: 1,
       valueDistance: 50
     };
+    _this.carsFilter = _this.carsFilter.bind(_this);
     _this.handleOnSubmit = _this.handleOnSubmit.bind(_this);
     _this.handleOnChangeDuration = _this.handleOnChangeDuration.bind(_this);
     _this.handleOnChangeDistance = _this.handleOnChangeDistance.bind(_this);
@@ -32414,7 +32452,12 @@ function (_super) {
 }(React.Component);
 
 exports.default = Cars;
-},{"react":"../node_modules/react/index.js","./ListCars":"components/ListCars.tsx","./Filter":"components/Filter.tsx","./Spinner":"components/Spinner.tsx"}],"../node_modules/process/browser.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./ListCars":"components/ListCars.tsx","./Filter":"components/Filter.tsx","./Spinner":"components/Spinner.tsx"}],"App.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/process/browser.js":[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {}; // cached from whatever global is present so that test runners that stub it
@@ -50316,23 +50359,26 @@ var React = __importStar(require("react"));
 
 var Cars_1 = __importDefault(require("./components/Cars"));
 
+require("./App.css");
+
 require("bootstrap");
 
-require("bootstrap/dist/css/bootstrap.css"); // Import precompiled Bootstrap css
-
+require("bootstrap/dist/css/bootstrap.css");
 
 require("@fortawesome/fontawesome-free/css/all.css");
 
 var App = function App() {
   return React.createElement("div", {
-    className: "container"
+    className: "app"
   }, React.createElement("h1", {
-    className: "text-center mb-5 mt-5"
-  }, "Cars Challenge - App"), React.createElement("div", null, React.createElement(Cars_1.default, null)));
+    className: "text-center mb-5"
+  }, "Cars Challenge - App"), React.createElement("div", {
+    className: "container"
+  }, React.createElement(Cars_1.default, null)));
 };
 
 exports.default = App;
-},{"react":"../node_modules/react/index.js","./components/Cars":"components/Cars.tsx","bootstrap":"../node_modules/bootstrap/dist/js/bootstrap.js","bootstrap/dist/css/bootstrap.css":"../node_modules/bootstrap/dist/css/bootstrap.css","@fortawesome/fontawesome-free/css/all.css":"../node_modules/@fortawesome/fontawesome-free/css/all.css"}],"index.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./components/Cars":"components/Cars.tsx","./App.css":"App.css","bootstrap":"../node_modules/bootstrap/dist/js/bootstrap.js","bootstrap/dist/css/bootstrap.css":"../node_modules/bootstrap/dist/css/bootstrap.css","@fortawesome/fontawesome-free/css/all.css":"../node_modules/@fortawesome/fontawesome-free/css/all.css"}],"index.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importStar = this && this.__importStar || function (mod) {
@@ -50395,7 +50441,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62924" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51802" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

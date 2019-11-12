@@ -20,6 +20,7 @@ class Cars extends React.Component<any, IState> {
             valueDuration: 1,
             valueDistance: 50,
         };
+        this.carsFilter = this.carsFilter.bind(this);
         this.handleOnSubmit = this.handleOnSubmit.bind(this);
         this.handleOnChangeDuration = this.handleOnChangeDuration.bind(this);
         this.handleOnChangeDistance = this.handleOnChangeDistance.bind(this);
