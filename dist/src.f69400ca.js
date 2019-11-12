@@ -31872,13 +31872,11 @@ var CarsCard = function CarsCard(_a) {
       brand = _a.brand,
       model = _a.model,
       pricePerDay = _a.pricePerDay,
-      pricePerKm = _a.pricePerKm,
-      maxDuration = _a.maxDuration,
-      maxDistance = _a.maxDistance;
+      pricePerKm = _a.pricePerKm;
   return React.createElement("div", {
     className: "col-md-3 col-sm-6 mb-5"
   }, React.createElement("div", {
-    className: "card"
+    className: "card shadow p-3 mb-5 bg-white rounded"
   }, React.createElement("img", {
     src: urlImage,
     className: "card-img-top"
@@ -31887,11 +31885,11 @@ var CarsCard = function CarsCard(_a) {
   }, React.createElement("h5", {
     className: "card-title"
   }, brand, " - ", model), React.createElement("ul", {
-    class: "list-group list-group-flush"
+    className: "list-group list-group-flush"
   }, React.createElement("li", {
-    class: "list-group-item"
+    className: "list-group-item"
   }, "Price/Day : ", pricePerDay / 100, " \u20AC"), React.createElement("li", {
-    class: "list-group-item"
+    className: "list-group-item"
   }, "Price/km : ", pricePerKm / 100, " \u20AC")))));
 };
 
@@ -31927,21 +31925,112 @@ var ListCars = function ListCars(_a) {
   var cars = _a.cars;
   return React.createElement("div", {
     className: "row"
-  }, cars.map(function (i) {
+  }, cars.map(function (i, index) {
     return React.createElement(CarsCard_1.default, {
+      key: 'i' + index,
       urlImage: i.picturePath,
       brand: i.brand,
       model: i.model,
       pricePerDay: i.pricePerDay,
-      pricePerKm: i.pricePerKm,
-      maxDuration: i.availability.maxDuration,
-      maxDistance: i.availability.maxDistance
+      pricePerKm: i.pricePerKm
     });
   }));
 };
 
 exports.default = ListCars;
-},{"react":"../node_modules/react/index.js","./CarsCard":"components/CarsCard.tsx"}],"components/Cars.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./CarsCard":"components/CarsCard.tsx"}],"components/Filter.tsx":[function(require,module,exports) {
+"use strict";
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  }
+  result["default"] = mod;
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var React = __importStar(require("react"));
+
+var Filter = function Filter(_a) {
+  var handleSubmit = _a.handleSubmit,
+      handleOnChangeDuration = _a.handleOnChangeDuration,
+      handleOnChangeDistance = _a.handleOnChangeDistance,
+      duration = _a.duration,
+      distance = _a.distance;
+  return React.createElement("div", {
+    className: "mb-5 mt-5 shadow-sm p-3 mb-5 bg-white rounded"
+  }, React.createElement("h4", {
+    className: "text-center"
+  }, "Filter"), React.createElement("form", {
+    onSubmit: handleSubmit
+  }, React.createElement("label", {
+    htmlFor: "duration"
+  }, "Duration : ", duration, " days"), React.createElement("input", {
+    type: "range",
+    className: "custom-range",
+    min: "1",
+    max: "30",
+    id: "duration",
+    defaultValue: duration,
+    onInput: handleOnChangeDuration,
+    name: "durationFilter"
+  }), React.createElement("label", {
+    htmlFor: "distance"
+  }, "Distance : ", distance, " km"), React.createElement("input", {
+    type: "range",
+    className: "custom-range",
+    min: "50",
+    max: "3000",
+    step: "50",
+    id: "distance",
+    defaultValue: distance,
+    onInput: handleOnChangeDistance,
+    name: "distanceFilter"
+  }), React.createElement("button", {
+    type: "submit",
+    className: "btn btn-primary"
+  }, "Submit")));
+};
+
+exports.default = Filter;
+},{"react":"../node_modules/react/index.js"}],"components/Spinner.tsx":[function(require,module,exports) {
+"use strict";
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  }
+  result["default"] = mod;
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var React = __importStar(require("react"));
+
+var Spinner = function Spinner() {
+  return React.createElement("div", {
+    className: "d-flex justify-content-center"
+  }, React.createElement("div", {
+    className: "spinner-border",
+    role: "status"
+  }, React.createElement("span", {
+    className: "sr-only"
+  }, "Loading...")));
+};
+
+exports.default = Spinner;
+},{"react":"../node_modules/react/index.js"}],"components/Cars.tsx":[function(require,module,exports) {
 "use strict";
 
 var __extends = this && this.__extends || function () {
@@ -32137,6 +32226,10 @@ var React = __importStar(require("react"));
 
 var ListCars_1 = __importDefault(require("./ListCars"));
 
+var Filter_1 = __importDefault(require("./Filter"));
+
+var Spinner_1 = __importDefault(require("./Spinner"));
+
 var Cars =
 /** @class */
 function (_super) {
@@ -32145,10 +32238,47 @@ function (_super) {
   function Cars(props) {
     var _this = _super.call(this, props) || this;
 
+    _this.handleOnSubmit = function (e) {
+      e.preventDefault();
+      var dur = e.currentTarget.durationFilter.value;
+      var dist = e.currentTarget.distanceFilter.value;
+      console.log(e.currentTarget.distanceFilter.value);
+      console.log(e.currentTarget.durationFilter.value);
+
+      var data = _this.carsFilter(dur, dist);
+
+      data.then(function (value) {
+        _this.setState({
+          cars: value
+        });
+      });
+    };
+
+    _this.handleOnChangeDuration = function () {
+      var val = document.getElementById("duration").value;
+
+      _this.setState({
+        valueDuration: val
+      });
+    };
+
+    _this.handleOnChangeDistance = function () {
+      var val = document.getElementById("distance").value;
+
+      _this.setState({
+        valueDistance: val
+      });
+    };
+
     _this.state = {
       cars: [],
-      isLoading: true
+      isLoading: true,
+      valueDuration: 1,
+      valueDistance: 50
     };
+    _this.handleOnSubmit = _this.handleOnSubmit.bind(_this);
+    _this.handleOnChangeDuration = _this.handleOnChangeDuration.bind(_this);
+    _this.handleOnChangeDistance = _this.handleOnChangeDistance.bind(_this);
     return _this;
   }
 
@@ -32203,13 +32333,49 @@ function (_super) {
     });
   };
 
+  Cars.prototype.carsFilter = function (dur, dist) {
+    return __awaiter(this, void 0, void 0, function () {
+      var res, data;
+      return __generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            return [4
+            /*yield*/
+            , fetch('http://localhost:3001/cars.json?duration=' + dur + '&distance=' + dist)];
+
+          case 1:
+            res = _a.sent();
+            return [4
+            /*yield*/
+            , res.json()];
+
+          case 2:
+            data = _a.sent();
+            return [2
+            /*return*/
+            , data];
+        }
+      });
+    });
+  };
+
   Cars.prototype.render = function () {
     var _a = this.state,
         cars = _a.cars,
-        isLoading = _a.isLoading;
-    return React.createElement("div", null, console.log("hello"), console.log(cars), isLoading ? console.log("load") : React.createElement("div", {
-      className: "card-deck"
-    }, isLoading ? console.log("loading") : React.createElement(ListCars_1.default, {
+        isLoading = _a.isLoading,
+        valueDuration = _a.valueDuration,
+        valueDistance = _a.valueDistance;
+    return React.createElement("div", null, React.createElement("div", {
+      className: "w-50 mx-auto"
+    }, React.createElement(Filter_1.default, {
+      handleSubmit: this.handleOnSubmit,
+      handleOnChangeDuration: this.handleOnChangeDuration,
+      handleOnChangeDistance: this.handleOnChangeDistance,
+      duration: valueDuration,
+      distance: valueDistance
+    })), isLoading ? React.createElement(Spinner_1.default, null) : React.createElement("div", {
+      className: "card-group"
+    }, React.createElement(ListCars_1.default, {
       cars: cars
     })));
   };
@@ -32218,7 +32384,7 @@ function (_super) {
 }(React.Component);
 
 exports.default = Cars;
-},{"react":"../node_modules/react/index.js","./ListCars":"components/ListCars.tsx"}],"../node_modules/process/browser.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./ListCars":"components/ListCars.tsx","./Filter":"components/Filter.tsx","./Spinner":"components/Spinner.tsx"}],"../node_modules/process/browser.js":[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {}; // cached from whatever global is present so that test runners that stub it
@@ -50130,7 +50296,9 @@ require("@fortawesome/fontawesome-free/css/all.css");
 var App = function App() {
   return React.createElement("div", {
     className: "container"
-  }, React.createElement("h1", null, "Cars Challenge - App"), React.createElement("div", null, React.createElement(Cars_1.default, null)));
+  }, React.createElement("h1", {
+    className: "text-center mb-5 mt-5"
+  }, "Cars Challenge - App"), React.createElement("div", null, React.createElement(Cars_1.default, null)));
 };
 
 exports.default = App;
@@ -50197,7 +50365,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56656" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50521" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
