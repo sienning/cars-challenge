@@ -3,10 +3,9 @@ import '../CarsCard.css'
 
 const CarsCard = ({ urlImage, brand, model, pricePerDay, pricePerKm, duration, distance }) => {
     let pDay = pricePerDay / 100;
-    const pKm = pricePerKm / 100;
-    const price = ((duration * pDay) + (distance * pKm)).toFixed(2);
+    let pKm = pricePerKm / 100;
 
-    const calculate = (pDay) => {
+    const calculatePDay = (pDay) => {
         pDay = pricePerDay / 100;
 
         if (duration > 1 && duration < 4) {
@@ -19,6 +18,14 @@ const CarsCard = ({ urlImage, brand, model, pricePerDay, pricePerKm, duration, d
         return pDay.toFixed(2);
     }
 
+    const calcPrice = (pD, pK, duration, distance) => {
+        const pDay = calculatePDay(pD);
+        const price = ((duration * pDay) + (distance * pK)).toFixed(2);
+
+        console.log("(("+duration+" * "+pDay+") + ("+distance+" * "+pK+"))")
+        return price;
+    };
+
     return (
         <div className="col-md-3 col-md-4 mb-5">
             <div className="card border-0 text-center shadow mb-5 bg-white rounded">
@@ -27,12 +34,12 @@ const CarsCard = ({ urlImage, brand, model, pricePerDay, pricePerKm, duration, d
                 <img src={urlImage} className="card-img-top rounded" />
                     <h5 className="card-title mt-4">{brand} {model}</h5>
                     <p className="card-text">
-                        <b>{price} €</b>
+                        <b>{calcPrice(pDay, pKm, duration, distance)} €</b>
                     </p>
                 </div>
 
                 <div className="card-footer text-muted clearfix" >
-                    <span className="prices float-left"><small>Price/Day : {calculate(pDay)} €</small></span>
+                    <span className="prices float-left"><small>Price/Day : {calculatePDay(pDay)} €</small></span>
                     <span className="prices float-right"><small >Price/km : {pKm} €</small></span>
                 </div>
             </div>

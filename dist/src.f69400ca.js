@@ -31889,9 +31889,8 @@ var CarsCard = function CarsCard(_a) {
       distance = _a.distance;
   var pDay = pricePerDay / 100;
   var pKm = pricePerKm / 100;
-  var price = (duration * pDay + distance * pKm).toFixed(2);
 
-  var calculate = function calculate(pDay) {
+  var calculatePDay = function calculatePDay(pDay) {
     pDay = pricePerDay / 100;
 
     if (duration > 1 && duration < 4) {
@@ -31903,6 +31902,13 @@ var CarsCard = function CarsCard(_a) {
     }
 
     return pDay.toFixed(2);
+  };
+
+  var calcPrice = function calcPrice(pD, pK, duration, distance) {
+    var pDay = calculatePDay(pD);
+    var price = (duration * pDay + distance * pK).toFixed(2);
+    console.log("((" + duration + " * " + pDay + ") + (" + distance + " * " + pK + "))");
+    return price;
   };
 
   return React.createElement("div", {
@@ -31918,11 +31924,11 @@ var CarsCard = function CarsCard(_a) {
     className: "card-title mt-4"
   }, brand, " ", model), React.createElement("p", {
     className: "card-text"
-  }, React.createElement("b", null, price, " \u20AC"))), React.createElement("div", {
+  }, React.createElement("b", null, calcPrice(pDay, pKm, duration, distance), " \u20AC"))), React.createElement("div", {
     className: "card-footer text-muted clearfix"
   }, React.createElement("span", {
     className: "prices float-left"
-  }, React.createElement("small", null, "Price/Day : ", calculate(pDay), " \u20AC")), React.createElement("span", {
+  }, React.createElement("small", null, "Price/Day : ", calculatePDay(pDay), " \u20AC")), React.createElement("span", {
     className: "prices float-right"
   }, React.createElement("small", null, "Price/km : ", pKm, " \u20AC")))));
 };
@@ -32090,7 +32096,7 @@ var Spinner = function Spinner() {
   return React.createElement("div", {
     className: "d-flex justify-content-center"
   }, React.createElement("div", {
-    className: "spinner-border",
+    className: "spinner-border text-light",
     role: "status"
   }, React.createElement("span", {
     className: "sr-only"
@@ -50452,7 +50458,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64563" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64626" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
