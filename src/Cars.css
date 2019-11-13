@@ -8,3 +8,10 @@
     background-size: cover;
     background-color: white;
 }
+
+@media screen and (max-width: 600px) {
+    .w-50.mx-auto {
+        width: 100% !important;
+        min-width: 300px;
+    }
+}

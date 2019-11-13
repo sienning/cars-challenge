@@ -8,15 +8,31 @@
     background-size: cover;
     background-color: white;
 }
+
+@media screen and (max-width: 600px) {
+    .w-50.mx-auto {
+        width: 100% !important;
+        min-width: 300px;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .prices.float-left,.prices.float-right {
+        display: list-item;
+        list-style: none;
+        float: none !important;
+    }
+}
 #offer{
     visibility: hidden;
     display: inline;
 }
+
+
 .app{
     height: 100%;
     background: #FF5F6D;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #FFC371, #FF5F6D);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #FFC371, #FF5F6D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: -webkit-linear-gradient(to right, #FFC371, #FF5F6D);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFC371, #FF5F6D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 
     /* background-image: url('../public/road.jpg');

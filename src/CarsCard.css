@@ -1,0 +1,7 @@
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .prices.float-left,.prices.float-right {
+        display: list-item;
+        list-style: none;
+        float: none !important;
+    }
+}

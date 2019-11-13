@@ -82,8 +82,7 @@ class Cars extends React.Component<any, IState> {
             <div>
                 <div className="jumbotron h-50 shadow rounded-0">
                     <h1 className="display-4 text-center">Car rental</h1>
-                    <p className="lead text-center">Rent a car</p>
-                    {/* <hr className="my-4" /> */}
+                    <p className="lead text-center">Rent a car - challenge</p>
                     <div className="lead">
                         <div className="w-50 mx-auto">
                             <Filter handleSubmit={this.handleOnSubmit} handleOnChangeDuration={this.handleOnChangeDuration} handleOnChangeDistance={this.handleOnChangeDistance} duration={valueDuration} distance={valueDistance} />

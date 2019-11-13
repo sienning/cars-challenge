@@ -31853,7 +31853,12 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./../public/canyon-2.png":[["canyon-2.b5242d83.png","../public/canyon-2.png"],"../public/canyon-2.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/CarsCard.tsx":[function(require,module,exports) {
+},{"./../public/canyon-2.png":[["canyon-2.b5242d83.png","../public/canyon-2.png"],"../public/canyon-2.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"CarsCard.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/CarsCard.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importStar = this && this.__importStar || function (mod) {
@@ -31871,6 +31876,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var React = __importStar(require("react"));
+
+require("../CarsCard.css");
 
 var CarsCard = function CarsCard(_a) {
   var urlImage = _a.urlImage,
@@ -31901,31 +31908,27 @@ var CarsCard = function CarsCard(_a) {
   return React.createElement("div", {
     className: "col-md-3 col-md-4 mb-5"
   }, React.createElement("div", {
-    className: "card text-center shadow p-3 mb-5 bg-white rounded"
+    className: "card border-0 text-center shadow mb-5 bg-white rounded"
+  }, React.createElement("div", {
+    className: "card-body"
   }, React.createElement("img", {
     src: urlImage,
     className: "card-img-top rounded"
-  }), React.createElement("div", {
-    className: "card-body"
-  }, React.createElement("h5", {
-    className: "card-title"
-  }, brand, " - ", model), React.createElement("ul", {
-    className: "list-group list-group-flush"
-  }, React.createElement("li", {
-    className: "list-group-item"
-  }, "Price/Day : ", calculate(pDay), " \u20AC"), React.createElement("li", {
-    className: "list-group-item",
-    id: "p-km"
-  }, "Price/km : ", pKm, " \u20AC"), React.createElement("li", {
-    className: "list-group-item",
-    id: "price"
-  }, React.createElement("div", {
+  }), React.createElement("h5", {
+    className: "card-title mt-4"
+  }, brand, " ", model), React.createElement("p", {
     className: "card-text"
-  }, React.createElement("b", null, " Price : ", price, " \u20AC")))))));
+  }, React.createElement("b", null, price, " \u20AC"))), React.createElement("div", {
+    className: "card-footer text-muted clearfix"
+  }, React.createElement("span", {
+    className: "prices float-left"
+  }, React.createElement("small", null, "Price/Day : ", calculate(pDay), " \u20AC")), React.createElement("span", {
+    className: "prices float-right"
+  }, React.createElement("small", null, "Price/km : ", pKm, " \u20AC")))));
 };
 
 exports.default = CarsCard;
-},{"react":"../node_modules/react/index.js"}],"components/ListCars.tsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../CarsCard.css":"CarsCard.css"}],"components/ListCars.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importStar = this && this.__importStar || function (mod) {
@@ -32027,7 +32030,7 @@ var Filter = function Filter(_a) {
   };
 
   return React.createElement("div", {
-    className: "shadow p-3 mb-5 bg-white mt-5 rounded"
+    className: "filter shadow p-3 mb-5 bg-white mt-5 rounded"
   }, React.createElement("h4", {
     className: "text-center"
   }, "Plan your car rental"), React.createElement("h6", {
@@ -32437,7 +32440,7 @@ function (_super) {
       className: "display-4 text-center"
     }, "Car rental"), React.createElement("p", {
       className: "lead text-center"
-    }, "Rent a car"), React.createElement("div", {
+    }, "Rent a car - challenge"), React.createElement("div", {
       className: "lead"
     }, React.createElement("div", {
       className: "w-50 mx-auto"
@@ -50449,7 +50452,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52399" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64563" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

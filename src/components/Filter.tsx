@@ -21,7 +21,7 @@ const Filter = ({ handleSubmit, handleOnChangeDuration, handleOnChangeDistance, 
         return percent;
     }
     return (
-        <div className="shadow p-3 mb-5 bg-white mt-5 rounded">
+        <div className="filter shadow p-3 mb-5 bg-white mt-5 rounded">
             <h4 className="text-center">Plan your car rental</h4>
             <h6 className="text-center" id="offer" >Special offer : Price per Day <span className="badge badge-success">-{calcPercent(duration)}%</span></h6>
             

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import '../CarsCard.css'
 
 const CarsCard = ({ urlImage, brand, model, pricePerDay, pricePerKm, duration, distance }) => {
     let pDay = pricePerDay / 100;
@@ -20,19 +21,19 @@ const CarsCard = ({ urlImage, brand, model, pricePerDay, pricePerKm, duration, d
 
     return (
         <div className="col-md-3 col-md-4 mb-5">
-            <div className="card text-center shadow p-3 mb-5 bg-white rounded">
-                <img src={urlImage} className="card-img-top rounded" />
+            <div className="card border-0 text-center shadow mb-5 bg-white rounded">
+                
                 <div className="card-body">
-                    <h5 className="card-title">{brand} - {model}</h5>
-                    <ul className="list-group list-group-flush">
-                        <li className="list-group-item" >Price/Day : {calculate(pDay)} €</li>
-                        <li className="list-group-item" id="p-km">Price/km : {pKm} €</li>
-                        <li className="list-group-item" id="price">
-                            <div className="card-text">
-                                <b> Price : {price} €</b>
-                            </div>
-                        </li>
-                    </ul>
+                <img src={urlImage} className="card-img-top rounded" />
+                    <h5 className="card-title mt-4">{brand} {model}</h5>
+                    <p className="card-text">
+                        <b>{price} €</b>
+                    </p>
+                </div>
+
+                <div className="card-footer text-muted clearfix" >
+                    <span className="prices float-left"><small>Price/Day : {calculate(pDay)} €</small></span>
+                    <span className="prices float-right"><small >Price/km : {pKm} €</small></span>
                 </div>
             </div>
         </div>
