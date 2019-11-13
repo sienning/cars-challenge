@@ -31848,7 +31848,12 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/CarsCard.tsx":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"Cars.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"./../public/canyon-2.png":[["canyon-2.b5242d83.png","../public/canyon-2.png"],"../public/canyon-2.png"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/CarsCard.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importStar = this && this.__importStar || function (mod) {
@@ -31894,12 +31899,12 @@ var CarsCard = function CarsCard(_a) {
   };
 
   return React.createElement("div", {
-    className: "col-md-3 col-sm-6 mb-5"
+    className: "col-md-3 col-md-4 mb-5"
   }, React.createElement("div", {
     className: "card text-center shadow p-3 mb-5 bg-white rounded"
   }, React.createElement("img", {
     src: urlImage,
-    className: "card-img-top"
+    className: "card-img-top rounded"
   }), React.createElement("div", {
     className: "card-body"
   }, React.createElement("h5", {
@@ -32006,28 +32011,23 @@ var Filter = function Filter(_a) {
     var offer = document.getElementById("offer");
 
     if (dur > 1 && dur < 4) {
-      console.log("hello");
       offer.style.visibility = "visible";
       percent = 10;
     } else if (dur > 4 && dur < 10) {
-      console.log("bye");
       offer.style.visibility = "visible";
       percent = 30;
     } else if (dur >= 10) {
-      console.log("ok");
       offer.style.visibility = "visible";
       percent = 50;
     } else if (dur == 1) {
-      console.log("hi");
-      console.log(offer);
-      percent = 0; // offer.style.visibility = "";
+      percent = 0;
     }
 
     return percent;
   };
 
   return React.createElement("div", {
-    className: "mb-5 mt-5 shadow-sm p-3 mb-5 bg-white rounded"
+    className: "shadow p-3 mb-5 bg-white mt-5 rounded"
   }, React.createElement("h4", {
     className: "text-center"
   }, "Plan your car rental"), React.createElement("h6", {
@@ -32289,6 +32289,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var React = __importStar(require("react"));
 
+require("../Cars.css");
+
 var ListCars_1 = __importDefault(require("./ListCars"));
 
 var Filter_1 = __importDefault(require("./Filter"));
@@ -32430,6 +32432,14 @@ function (_super) {
         valueDuration = _a.valueDuration,
         valueDistance = _a.valueDistance;
     return React.createElement("div", null, React.createElement("div", {
+      className: "jumbotron h-50 shadow rounded-0"
+    }, React.createElement("h1", {
+      className: "display-4 text-center"
+    }, "Car rental"), React.createElement("p", {
+      className: "lead text-center"
+    }, "Rent a car"), React.createElement("div", {
+      className: "lead"
+    }, React.createElement("div", {
       className: "w-50 mx-auto"
     }, React.createElement(Filter_1.default, {
       handleSubmit: this.handleOnSubmit,
@@ -32437,22 +32447,24 @@ function (_super) {
       handleOnChangeDistance: this.handleOnChangeDistance,
       duration: valueDuration,
       distance: valueDistance
-    })), React.createElement("h4", {
-      className: "text-center mb-4"
+    })))), React.createElement("div", {
+      className: "container"
+    }, React.createElement("h4", {
+      className: "text-center mb-4 text-white"
     }, "Cars available"), isLoading ? React.createElement(Spinner_1.default, null) : React.createElement("div", {
       className: "card-group"
     }, React.createElement(ListCars_1.default, {
       cars: cars,
       duration: valueDuration,
       distance: valueDistance
-    })));
+    }))));
   };
 
   return Cars;
 }(React.Component);
 
 exports.default = Cars;
-},{"react":"../node_modules/react/index.js","./ListCars":"components/ListCars.tsx","./Filter":"components/Filter.tsx","./Spinner":"components/Spinner.tsx"}],"App.css":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../Cars.css":"Cars.css","./ListCars":"components/ListCars.tsx","./Filter":"components/Filter.tsx","./Spinner":"components/Spinner.tsx"}],"App.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -50370,11 +50382,7 @@ require("@fortawesome/fontawesome-free/css/all.css");
 var App = function App() {
   return React.createElement("div", {
     className: "app"
-  }, React.createElement("h1", {
-    className: "text-center mb-5"
-  }, "Cars Challenge - App"), React.createElement("div", {
-    className: "container"
-  }, React.createElement(Cars_1.default, null)));
+  }, React.createElement(Cars_1.default, null));
 };
 
 exports.default = App;
@@ -50441,7 +50449,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51802" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52399" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

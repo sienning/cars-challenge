@@ -19,9 +19,9 @@ const CarsCard = ({ urlImage, brand, model, pricePerDay, pricePerKm, duration, d
     }
 
     return (
-        <div className="col-md-3 col-sm-6 mb-5">
+        <div className="col-md-3 col-md-4 mb-5">
             <div className="card text-center shadow p-3 mb-5 bg-white rounded">
-                <img src={urlImage} className="card-img-top" />
+                <img src={urlImage} className="card-img-top rounded" />
                 <div className="card-body">
                     <h5 className="card-title">{brand} - {model}</h5>
                     <ul className="list-group list-group-flush">

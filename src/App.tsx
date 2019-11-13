@@ -8,11 +8,7 @@ import '@fortawesome/fontawesome-free/css/all.css';
 
 const App = () => (
   <div className="app" >
-    <h1 className="text-center mb-5">Cars Challenge - App</h1>
-    <div className="container">
       <Cars />
-    </div>
-
   </div>
 );
 
