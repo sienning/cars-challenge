@@ -21,8 +21,6 @@ const CarsCard = ({ urlImage, brand, model, pricePerDay, pricePerKm, duration, d
     const calcPrice = (pD, pK, duration, distance) => {
         const pDay = calculatePDay(pD);
         const price = ((duration * pDay) + (distance * pK)).toFixed(2);
-
-        console.log("(("+duration+" * "+pDay+") + ("+distance+" * "+pK+"))")
         return price;
     };
 

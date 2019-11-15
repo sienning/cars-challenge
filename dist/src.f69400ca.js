@@ -31907,7 +31907,6 @@ var CarsCard = function CarsCard(_a) {
   var calcPrice = function calcPrice(pD, pK, duration, distance) {
     var pDay = calculatePDay(pD);
     var price = (duration * pDay + distance * pK).toFixed(2);
-    console.log("((" + duration + " * " + pDay + ") + (" + distance + " * " + pK + "))");
     return price;
   };
 
@@ -32328,16 +32327,16 @@ function (_super) {
       });
     };
 
-    _this.handleOnChangeDuration = function () {
-      var val = document.getElementById("duration").value;
+    _this.handleOnChangeDuration = function (e) {
+      var val = e.currentTarget.value;
 
       _this.setState({
         valueDuration: val
       });
     };
 
-    _this.handleOnChangeDistance = function () {
-      var val = document.getElementById("distance").value;
+    _this.handleOnChangeDistance = function (e) {
+      var val = e.currentTarget.value;
 
       _this.setState({
         valueDistance: val
@@ -50458,7 +50457,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64626" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53929" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

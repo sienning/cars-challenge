@@ -61,14 +61,15 @@ class Cars extends React.Component<any, IState> {
 
     };
 
-    handleOnChangeDuration = () => {
-        const val = document.getElementById("duration").value;
+    handleOnChangeDuration = (e) => {
+        const val = e.currentTarget.value
+        
         this.setState({ valueDuration: val });
 
     };
 
-    handleOnChangeDistance = () => {
-        const val = document.getElementById("distance").value;
+    handleOnChangeDistance = (e) => {
+        const val = e.currentTarget.value
         this.setState({ valueDistance: val });
 
     };
